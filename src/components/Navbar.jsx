@@ -1,15 +1,18 @@
 import { useState } from "react";
+import Image from "./Image";
+import { Link } from "react-router-dom";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
+  const [open,setOpen] = useState(false);
 
   return (
     <div className="w-full h-16 md:h-20 flex items-center justify-between px-4">
       {/* logo */}
-      <div className="flex items-center gap-4 text-2xl font-bold">
-        <img src="/logo.png" className="w-8 h-8" alt="logo" />
+      <Link to='/' className="flex items-center gap-4 text-2xl font-bold">
+        <Image src="public/logo.png" alt="logo" w={32} h={32} />
         <span>Lamalog</span>
-      </div>
+      </Link>
 
       {/* Mobile Menu */}
       <div className="md:hidden">
@@ -46,11 +49,17 @@ const Navbar = () => {
         <a href="/">Trending</a>
         <a href="/">Most Popular</a>
         <a href="/">About</a>
+        <SignedOut>
         <a href="/">
           <button className="py-2 px-4 rounded-3xl bg-blue-800 text-white">
             Login 👋
           </button>
         </a>
+
+      </SignedOut>
+      <SignedIn>
+        <UserButton />
+      </SignedIn>
       </div>
     </div>
   );

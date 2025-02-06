@@ -2,11 +2,14 @@ import express from "express"
 import router from "./routes/user.route.js"
 import postrouter from "./routes/post.route.js"
 import commentrouter from "./routes/comment.route.js"
+import webhookrouter from "./routes/webhook.route.js"
+
 import connectDB from "./lib/connectDB.js"
 import dotenv from 'dotenv';
 dotenv.config();  
 
 const app = express()
+app.use("/webhooks",webhookrouter)
 app.use(express.json())
 app.use((error,req,res,next)=>{
     res.status(error.status || 500);
@@ -25,6 +28,7 @@ app.use((error,req,res,next)=>{
 app.use("/users",router)
 app.use("/posts",postrouter);
 app.use("/comment",commentrouter)
+
 
 
 

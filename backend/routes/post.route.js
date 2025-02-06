@@ -1,9 +1,13 @@
 import express from 'express'
+import { createPost,deletePost, getPost, getPosts } from '../controllers/post.controller.js';
 
 const postrouter = express();
 
-postrouter.get("/tester",(req,res)=>{
-    res.status(200).send("yeh b chal raha")
-})
+postrouter.get("/",getPosts);
+postrouter.get("/:slug",getPost);
+postrouter.post("/",createPost);
+postrouter.delete("/:id",deletePost)
+
+
 
 export default postrouter;
